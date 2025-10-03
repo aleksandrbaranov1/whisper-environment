@@ -1,0 +1,6 @@
+[submodule "Whisper"]
+	path = Whisper
+	url = https://github.com/aleksandrbaranov1/Whisper.git
+[submodule "whisper-frontend2"]
+	path = whisper-frontend2
+	url = https://github.com/aleksandrbaranov1/whisper-frontend2.git
