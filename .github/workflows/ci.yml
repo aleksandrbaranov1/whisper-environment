@@ -57,8 +57,7 @@ jobs:
       # 5. Запускаем тесты внутри Docker-контейнера
       - name: Run backend tests inside Docker
         run: |
-          docker run --rm \
-            --network host \   # чтобы контейнер видел postgres и redis
+          docker run --rm --network host \
             -e SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/whisperdb \
             -e SPRING_DATASOURCE_USERNAME=postgres \
             -e SPRING_DATASOURCE_PASSWORD=0000 \
