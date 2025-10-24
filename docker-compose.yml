@@ -45,6 +45,8 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    env_file:
+      - ./Whisper/.env
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/whisperdb
       SPRING_DATASOURCE_USERNAME: postgres
