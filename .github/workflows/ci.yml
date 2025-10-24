@@ -53,7 +53,7 @@ jobs:
       # 4. Собираем Docker-образ
       - name: Build backend Docker image
         run: docker build -t whisper-backend ./Whisper
-
+        #fdf
       # 5. Запускаем тесты внутри Docker-контейнера
       - name: Run backend tests inside Docker
         run: |
