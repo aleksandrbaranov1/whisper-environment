@@ -7,7 +7,6 @@ on:
   pull_request:
 
 jobs:
-  # 🏗️ Stage 1: Build
   build:
     name: Build backend
     runs-on: ubuntu-latest
@@ -34,11 +33,10 @@ jobs:
           cd Whisper
           mvn -B clean package -DskipTests
 
-  # 🧪 Stage 2: Test
   test:
     name: Run tests with Postgres & Redis
     runs-on: ubuntu-latest
-    needs: build # ⬅️ ждёт завершения build job
+    needs: build
 
     services:
       postgres:
