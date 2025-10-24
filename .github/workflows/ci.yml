@@ -59,7 +59,7 @@ jobs:
         run: |
           mkdir -p ${{ github.workspace }}/.m2
           docker run --rm \
-            -e SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/whisperdb \
+            -e SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/whisperdb \
             -e SPRING_DATASOURCE_USERNAME=postgres \
             -e SPRING_DATASOURCE_PASSWORD=0000 \
             -e SPRING_REDIS_HOST=redis \
