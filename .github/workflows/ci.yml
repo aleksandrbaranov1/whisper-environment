@@ -8,6 +8,7 @@ on:
 jobs:
   backend_ci_docker:
     runs-on: ubuntu-latest
+
     services:
       postgres:
         image: postgres:16
@@ -34,18 +35,26 @@ jobs:
           --health-retries 5
 
     steps:
+      # 1. Checkout repository с сабмодулями
       - name: Checkout code including submodules
         uses: actions/checkout@v4
         with:
-          submodules: recursive # подтягиваем Whisper
-          fetch-depth: 0 # подтянуть полный репозиторий сабмодуля
+          submodules: recursive
+          fetch-depth: 0
 
+      # 2. Обновляем сабмодули явно на всякий случай
+      - name: Ensure submodules are updated
+        run: git submodule update --init --recursive
+
+      # 3. Показываем структуру папки для отладки
       - name: List Whisper directory for debugging
-        run: ls -R ./Whisper
+        run: tree -a -L 3 ./Whisper
 
+      # 4. Собираем Docker-образ
       - name: Build backend Docker image
-        run: docker build -t whisper-backend -f ./Whisper/Dockerfile ./Whisper
+        run: docker build -t whisper-backend ./Whisper
 
+      # 5. Запускаем тесты внутри Docker-контейнера
       - name: Run backend tests inside Docker
         run: |
           docker run --rm \
