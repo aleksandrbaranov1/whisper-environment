@@ -57,11 +57,12 @@ jobs:
       # 5. Запускаем тесты внутри Docker-контейнера
       - name: Run backend tests inside Docker
         run: |
-          docker run --rm --network host \
-            -e SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/whisperdb \
+          mkdir -p ${{ github.workspace }}/.m2
+          docker run --rm \
+            -e SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/whisperdb \
             -e SPRING_DATASOURCE_USERNAME=postgres \
             -e SPRING_DATASOURCE_PASSWORD=0000 \
-            -e SPRING_REDIS_HOST=localhost \
+            -e SPRING_REDIS_HOST=redis \
             -e SPRING_REDIS_PORT=6379 \
             -v ${{ github.workspace }}/.m2:/root/.m2 \
             whisper-backend mvn clean test
