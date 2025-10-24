@@ -38,9 +38,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive # подтягиваем Whisper
+          fetch-depth: 0 # подтянуть полный репозиторий сабмодуля
+
+      - name: List Whisper directory for debugging
+        run: ls -R ./Whisper
 
       - name: Build backend Docker image
-        run: docker build -t whisper-backend ./Whisper
+        run: docker build -t whisper-backend -f ./Whisper/Dockerfile ./Whisper
 
       - name: Run backend tests inside Docker
         run: |
